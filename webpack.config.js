@@ -61,7 +61,15 @@ const config = {
     extensions: ['', '.js', '.jsx']
   },
   plugins: [
-    new HtmlWebpackPlugin({title: 'No bullshit'}),
+    new HtmlWebpackPlugin({
+      template: 'app/index.html',
+      hash: true,
+      filename: 'index.html',
+      inject: 'body',
+      minify: {
+        collapseWhitespace: true
+      }
+    }),
     new webpack.HotModuleReplacementPlugin({multiStep: true}),
   ],
   postcss: function() {

@@ -7,8 +7,6 @@ import React from 'react';
 import App from 'container/App';
 
 document.addEventListener('DOMContentLoaded', () => {
-  const el = document.createElement('div');
-  el.id = 'app';
-  document.body.appendChild(el);
+  const el = document.getElementById('app');
   ReactDOM.render(<App />, el);
 });
