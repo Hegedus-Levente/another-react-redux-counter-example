@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import {connect} from 'react-redux';
-import {increment, decrement} from 'redux-modules/redux';
+import {increment, decrement} from 'redux-modules/counter';
 
 class Counter extends Component {
   static propTypes = {
-    progress: PropTypes.number.isRequired,
+    count: PropTypes.number.isRequired,
     dispatch: PropTypes.func.isRequired
   };
 
@@ -20,7 +20,7 @@ class Counter extends Component {
     return (
       <div className='counter'>
         <button onClick={this.increment}>+</button>
-        <label>{this.props.progress}</label>
+        <label>{this.props.count}</label>
         <button onClick={this.decrement}>-</button>
       </div>
     );
@@ -28,7 +28,7 @@ class Counter extends Component {
 }
 
 const mapStateToProps = state => ({
-  progress: state.progress
+  count: state.counter.count
 });
 
 export default connect(mapStateToProps)(Counter);

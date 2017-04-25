@@ -1,37 +1,17 @@
-import { createStore } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 
-const INCREMENT = 'INCREMENT';
-const DECREMENT = 'DECREMENT';
+import { combineReducers } from 'redux';
+import {progressActionsHandler} from './progress';
+import {counterActionsHandler} from './counter';
 
-// action creators
-
-export const increment = (toAdd = 1) => ({
-  type: INCREMENT,
-  payload: toAdd
+const reducers = combineReducers({
+  counter: counterActionsHandler,
+  progress: progressActionsHandler
 });
 
-export const decrement = (toRemove = 1) => ({
-  type: DECREMENT,
-  payload: toRemove
-});
+const entireStateMiddleware = ({ getState }) => next => action => next({...action, getEntireState: getState});
 
-const initialState = {
-  progress: 0
-};
-
-const reducer = (state = initialState, action) => {
-  if (typeof state === 'undefined') {
-    return initialState
-  }
-
-  switch (action.type) {
-    case INCREMENT:
-      return {...state, progress: state.progress + action.payload};
-    case DECREMENT:
-      return {...state, progress: state.progress > 0 ? state.progress - action.payload : 0};
-  }
-
-  return state;
-};
-
-export const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+export const store = createStore(
+  reducers,
+  compose(applyMiddleware(entireStateMiddleware), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+);
