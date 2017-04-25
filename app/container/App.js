@@ -1,29 +1,19 @@
 import React, { Component } from 'react';
-
-import Welcome from 'components/Welcome';
+import { Provider } from 'react-redux';
+import Counter from 'container/Counter';
+import Header from 'container/Header';
+import { store } from 'redux-modules/redux';
 
 class App extends Component {
-  constructor (props) {
-    super(props);
-
-    this.state = {
-      name: 'default'
-    };
-  }
-
-  onKeyUp (event) {
-    this.setState({
-      name: event.target.value
-    });
-  };
 
   render() {
     return (
-      <div>
-        <Welcome name={this.state.name} />
-        <label>Enter name</label>
-        <input type='text' onKeyUp={this.onKeyUp.bind(this)}/>
-      </div>
+      <Provider store={store}>
+        <div>
+          <Header/>
+          <Counter/>
+        </div>
+      </Provider>
     );
   }
 }

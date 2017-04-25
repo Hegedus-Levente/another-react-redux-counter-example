@@ -1,4 +1,35 @@
 * {
   box-sizing: border-box;
-  font-family: -apple-system, system, sans-serif;
+  font-family: 'Rubik', sans-serif;
+}
+
+#app {
+  max-width: 400px;
+  margin: auto;
+  border: 1px solid lightgray;
+}
+
+header {
+  padding: 10px;
+}
+
+h1 {
+  color: darkgray;
+  text-align: center;
+}
+
+.progress {
+  width: 100%;
+  height: 10px;
+  border: 1px solid darkgray;
+}
+
+.counter {
+  margin: auto;
+  display: block;
+  width: 100px;
+
+  button {
+    margin: 10px;
+  }
 }
