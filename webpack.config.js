@@ -71,6 +71,9 @@ const config = {
       }
     }),
     new webpack.HotModuleReplacementPlugin({multiStep: true}),
+    new webpack.ProvidePlugin({
+      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+    })
   ],
   postcss: function() {
     return [require('autoprefixer')];

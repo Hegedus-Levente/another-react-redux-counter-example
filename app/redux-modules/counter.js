@@ -20,4 +20,4 @@ export const types = {
 export const counterActionsHandler = handleActions({
   [INCREMENT]: (state, action) => ({...state, count: state.count + action.payload}),
   [DECREMENT]: (state, action) => ({...state, count: state.count > 0 ? state.count - action.payload : 0})
-}, {count: 0});
+}, {count: 0, targetValue: 10});

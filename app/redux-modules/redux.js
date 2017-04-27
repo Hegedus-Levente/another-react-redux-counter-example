@@ -1,17 +1,17 @@
 import { createStore, applyMiddleware, compose } from 'redux'
+import thunk from 'redux-thunk';
 
 import { combineReducers } from 'redux';
-import {progressActionsHandler} from './progress';
+import {targetActionsHandler} from './target';
 import {counterActionsHandler} from './counter';
 
 const reducers = combineReducers({
   counter: counterActionsHandler,
-  progress: progressActionsHandler
+  target: targetActionsHandler
 });
 
-const entireStateMiddleware = ({ getState }) => next => action => next({...action, getEntireState: getState});
-
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 export const store = createStore(
   reducers,
-  compose(applyMiddleware(entireStateMiddleware), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+  composeEnhancers(applyMiddleware(thunk))
 );
